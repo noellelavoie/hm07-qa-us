@@ -26,31 +26,31 @@ const requestBody = {
 test('should return 200 status code', async () => {
 	let actualStatus
     try {
-		const response = await fetch(`${config.API_URL}/api/v1/kits/1`, {
+		const response = await fetch(`${config.API_URL}/api/v1/kits/2`, {
 			method: 'PUT',
 			headers: {
 			'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(requestBody)
-		});
+		}); actualStatus=response.status;
 	} catch (error) {
 		console.error(error);
 	}
 	expect(actualStatus).toBe(200);
 });
-test('should return "undefined: status code', async () => {
-	let actualStatus
+
+test('should return correct response body', async () => {
+	let actualResponseBody
     try {
-		const response = await fetch(`${config.API_URL}/api/v1/kits/1`, {
+		const response = await fetch(`${config.API_URL}/api/v1/kits/2`, {
 			method: 'PUT',
 			headers: {
 			'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(requestBody)
-		});
+			body: JSON.stringify(actualResponseBody)
+		}); actualResponseBody=await response.json();
 	} catch (error) {
 		console.error(error);
 	}
-	expect(actualStatus).toBe(undefined);
+	expect(actualResponseBody.ok).toBeTruthy();
 });
-

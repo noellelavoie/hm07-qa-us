@@ -11,14 +11,14 @@ test('should return 200 status code', async () => {
 	}
 	expect(actualStatus).toBe(200);
 });
-test('should return 200 status code', async () => {
-	let actualStatus;
+test('should return correct response body', async () => {
+	let actualResponseBody;
 	try {
-		const response = await fetch(`${config.API_URL}/api/v1/kits/search`);
-		actualStatus=response.status;
+		const response = await fetch(`${config.API_URL}/api/v1/warehouses`);
+		actualResponseBody=await response.json();
 	} catch (error) {
 		console.error(error);
 	}
-	expect(actualStatus).toBe(200);
+	expect(actualResponseBody[0]["name"]).toBe("Everything You Need");
 });
 
